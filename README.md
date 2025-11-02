@@ -4,7 +4,7 @@
 
 The main motivation for this patch is to address the problem of segfaults in PHP 8.x when opening dlopen() plugins with the RTLD_DEEPBIND flag, introduced under a far-fetched pretext, which prevents the use of any custom allocators, including in cases where their use is obviously desirable.
 
-This flag, the use of which is strongly discouraged in principle, prevents the forwarding of LD_PRELOAD interpositions to loaded modules. Which leads to an immediate segfault in case of preloading an allocator other than the system one.
+This flag, the use of which is strongly discouraged in principle, prevents the forwarding of LD_PRELOAD interpositions to loaded modules. Which leads to an immediate segfault in case of preload an allocator other than the system one.
 
 The original idea was taken from [here](https://github.com/php/php-src/issues/10670), but the diff file is difficult to use. For this reason, it was converted to a patch format suitable for use on all PHP 8.x subversions.
 
