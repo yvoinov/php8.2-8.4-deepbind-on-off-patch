@@ -22,7 +22,7 @@ php -i | grep 'Configure Command'
 ```
 Then download the tarball and unzip it. Put the patch on top of your source tree and apply it:
 ```sh
-patch -p0 < php8.x_deepbind_on_off.patch
+patch -p0 < php8.2-8.4_deepbind_on_off.patch
 ```
 
 ### Configuration and build
