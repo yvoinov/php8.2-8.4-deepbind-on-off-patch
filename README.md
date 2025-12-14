@@ -1,4 +1,4 @@
-# PHP 8.x RTLD_DEEPBIND on/off patch
+# PHP 8.2-8.4 RTLD_DEEPBIND on/off patch
 [![License](https://img.shields.io/badge/License-MIT--Clause-blue.svg)](https://github.com/yvoinov/php8.x-deepbind-on-off-patch/blob/main/LICENSE)
 ## Motivation
 
