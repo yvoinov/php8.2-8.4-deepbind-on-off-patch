@@ -1,18 +1,21 @@
 Motivation
 ==========
 
-The  main motivation for this patch is to address the problem of segfaults in PHP 8.x when opening dlopen() plugins with
-the  RTLD_DEEPBIND  flag,  introduced  under  a  far-fetched  pretext,  which prevents the use of any custom allocators,
+The   main motivation for this patch is to address the problem of segfaults in PHP 8.2-8.4 when opening dlopen() plugins
+with  the  RTLD_DEEPBIND  flag, introduced under a far-fetched pretext, which prevents the use of any custom allocators,
 including in cases where their use is obviously desirable.
 
 This  flag,  the use of which is strongly discouraged in principle, prevents the forwarding of LD_PRELOAD interpositions
 to loaded modules. Which leads to an immediate segfault in case of preload an allocator other than the system one.
 
 The  original  idea  was  taken from here https://github.com/php/php-src/issues/10670, but the diff file is difficult to
-use. For this reason, it was converted to a patch format suitable for use on all PHP 8.x subversions.
+use. For this reason, it was converted to a patch format suitable for use on all PHP 8.2-8.4 subversions.
 
 Unfortunately,  there  is no easy way to solve the RTLD_DEEPBIND flag problem other than rebuilding the patched PHP from
 source and using it instead of the versions from the repositories.
+
+Note: In PHP 8.5.x this patch is generally not required, as dlmopen() is used instead of RTLD_DEEPBIND; furthermore, the
+patch is not fully compatible with that version.
 
 How to make it so
 =================
@@ -69,10 +72,9 @@ Then
 
 make && make install
 
-Note:  DO  NOT REMOVE the PHP 8.x version installed from the repositories, to avoid breaking dependencies. DO NOT remove
-the  installed  version  of PHP 8.x from the repositories, to avoid breaking dependencies. Do not modify package version
-files,  as  they  may  be  overwritten  by  updates,  and  do  not set immutable flags. This may lead to difficulties in
-maintaining the configuration.
+Note:  DO  NOT  REMOVE  the  PHP 8.2-8.4 version installed from the repositories, to avoid breaking dependencies. Do not
+modify  package  version  files,  as  they  may be overwritten by updates, and do not set immutable flags. This may lead
+to difficulties in maintaining the configuration.
 
 Switch alternatives
 -------------------
